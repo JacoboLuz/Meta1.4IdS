@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisor de Artículos Académicos</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/styles.css">
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="description" content="Plataforma PWA para revisión de artículos académicos">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
+    <div id="app"></div>
+
+    <!-- Load services in correct order -->
+    <script src="js/storage/ArticleStorage.js"></script>
+    <script src="js/services/ValidationService.js"></script>
+    <script src="js/services/ArticleManager.js"></script>
+    <script src="js/services/StatusService.js"></script>
+    <script src="js/services/OfflineService.js"></script>
+    <script src="js/app.js"></script>
+
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
